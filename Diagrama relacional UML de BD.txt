@@ -24,7 +24,7 @@ classDiagram
     class ProcesoProduccionAvicolaEtapa {
         +id:int
         +idEtapa: int
-        +ProcesoProduccionAvicola: int
+        +idProcesoProduccionAvicola: int
         +duracionEstimada: int
         +estado: bit
         +created_at: datetime
@@ -228,6 +228,18 @@ classDiagram
         +updated_at: datetime
         +lastUserChange: string
     }
+    class RecintoPolloLote {
+        +id: int
+        +idRecinto: int
+        +idPolloLote: int
+        +fechaHoraIngreso: datetime?
+        +fechaHoraSalida: datetime?
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+    }
     class TipoRecinto {
         +id: int
         +nombre: string
@@ -389,3 +401,5 @@ classDiagram
     PolloLote  "1" --> "N" MaquinaPolloLote
     Maquina "1" --> "N" MaquinaPolloLote
     PolloLote "1" --> "N"  CierreSemanalLote
+    PolloLote "1" --> "N"  RecintoPolloLote
+    Recinto  "1" --> "N"  RecintoPolloLote
