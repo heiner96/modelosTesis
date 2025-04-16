@@ -119,8 +119,49 @@ classDiagram
     class PolloLote {
         +id: int
         +nombre: string
-        +numeroJuliano: int
-        +cantidad: int
+        +numeroLote: string
+        +numeroJuliano: int?
+        +cantidadHuevos: int?
+        +cantidadPollos: int?
+        +fechaHoraNacimiento : datetime
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+    }
+    class MaquinaPolloLote {
+        +id: int
+        +idMaquina: int
+        +idPolloLote: int  
+        +fechaHoraIngreso : datetime   
+        +fechaHoraSalida : datetime      
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+    }
+    class Maquina {
+        +id: int
+        +idRecinto: int
+        +nombre: string
+        +descripcion: string
+        +tipo: string
+        +numeroSerie : string
+        +marca : string
+        +modelo : string
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+    }
+    class CategoriaPolloLote { 
+        +id: int  
+        +idPolloLote: int  
+        +idCategoriaPollo: int
+        +cantidad: int       
         +fechaHora : datetime
         +estado: bit
         +created_at: datetime
@@ -128,10 +169,33 @@ classDiagram
         +updated_at: datetime
         +lastUserChange: string
     }
-     class GalponPolloLote {
+    class CategoriaPollo {
+        +id: int
+        +nombre: string
+        +descripcion: string
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+    }
+    class GalponPolloLote {
         +id: int
         +idPolloLote: int
         +idGalpon: int
+        +fechaHoraIngreso: datetime?
+        +fechaHoraSalida: datetime?
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+    }
+    class CierreSemanalLote {
+        +id: int
+        +idPolloLote: int        
+        +fechaHora: datetime
+        +peso: int
         +estado: bit
         +created_at: datetime
         +created_user: string
@@ -318,4 +382,10 @@ classDiagram
     ContratoInteligente "1" --> "N"  RecintoContratoInteligente
     Transaccion"1" --> "N" RecintoContratoInteligente
     Recinto "1" --> "N"   RecintoTransaccion
-    Transaccion"1" --> "N" RecintoTransaccion
+    Transaccion "1" --> "N" RecintoTransaccion
+    PolloLote "1" --> "N" CategoriaPolloLote
+    CategoriaPollo "1" --> "N" CategoriaPolloLote
+    Recinto  "1" --> "N"  Maquina
+    PolloLote  "1" --> "N" MaquinaPolloLote
+    Maquina "1" --> "N" MaquinaPolloLote
+    PolloLote "1" --> "N"  CierreSemanalLote
