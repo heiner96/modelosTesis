@@ -1,0 +1,321 @@
+classDiagram
+    direction TB
+
+    class ProcesoProduccionAvicola {
+        +id: int
+        +nombre: string
+        +descripcion: string       
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+    }
+    class Etapa {
+        +id: int        
+        +nombre: string
+        +descripcion: string
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+    }
+    class ProcesoProduccionAvicolaEtapa {
+        +id:int
+        +idEtapa: int
+        +ProcesoProduccionAvicola: int
+        +duracionEstimada: int
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+    }
+    class ProcesoProduccionAvicolaEtapaEvento {
+        +id:int
+        +idProcesoProduccionAvicolaEtapa: int
+        +idEvento: int
+        +idSensorIoTLectura: int?
+        +idPolloLote: int
+        +cantidadAfectada: int?
+        +fechaHora: datetime
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+    }
+    class Evento {
+        +id: int
+        +nombre: string
+        +tipo: string       
+        +datos: string 
+        +estado: bit       
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+    }
+    class SensorIoT {
+        +id: int
+        +nombre: string 
+        +modelo: string
+        +numeroSerial: string     
+        +descripcion: string? 
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+    }
+    class SensorIoTLectura {
+        +id: int
+        +idSensorIoT: int
+        +valorRecuperado: string
+        +unidadMedida: string 
+        +tipoLecturaAmbiental: string 
+        +fechaHoraLectura: datetime 
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+    }
+    class SuministroProcesoProduccionAvicolaEtapa {
+        +id: int
+        +idSuministro: int
+        +idProcesoProduccionAvicolaEtapa: int 
+        +idPolloLote: int 
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+    }
+    class Suministro {
+        +id: int
+        +idTipoSuministro: int
+        +nombre: string
+        +descripcion: string
+        +lote: string
+        +fabricante: string
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+    }   
+    class TipoSuministro {
+        +id: int       
+        +nombre: string
+        +descripcion: string
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+    }   
+    class PolloLote {
+        +id: int
+        +nombre: string
+        +numeroJuliano: int
+        +cantidad: int
+        +fechaHora : datetime
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+    }
+     class GalponPolloLote {
+        +id: int
+        +idPolloLote: int
+        +idGalpon: int
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+    }
+    class Galpon {
+        +id: int
+        +idRecinto: int
+        +nombre: string
+        +descripcion: string?
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+    }
+    class Recinto {
+        +id: int
+        +idTipoRecinto: int
+        +nombre: string
+        +descripcion: string
+        +distrito: string
+        +canton: string
+        +provincia: string
+        +ubicacionFisica: string
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+    }
+    class TipoRecinto {
+        +id: int
+        +nombre: string
+        +descripcion: string
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+    }
+    class Persona {
+        +id: int
+        +nombre: string
+        +apellido1: string
+        +apellido2: string
+        +identificacion: string
+        +tipoIdentificacion: int               
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string 
+    }
+    class Usuario {
+        +id: int
+        +idPersona: int
+        +contrasenna: string
+        +email: string
+        +rol: string
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+    }
+    class UsuarioRecinto {
+        +id: int
+        +idUsuario: int
+        +idRecinto: int      
+        +nombrePuesto: string   
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+    }
+    class NotificacionUsuarioRecinto {
+        +id: int
+        +idUsuarioRecinto: int
+        +idNotificacion: int 
+        +idProcesoProduccionAvicolaEtapaEvento: int?
+        +descripcion: string?
+        +fechaEnvio: datetime
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+    }
+    class Notificacion {
+        +id: int
+        +mensaje: string
+        +descripcion: string
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+    }
+    class ContratoInteligente {
+        +id: int
+        +nombre: string
+        +descripcion: string
+        +direccionContrato: string
+        +codigoContrato: string
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+    }    
+    class RecintoContratoInteligente {
+        +id: int
+        +idContratoInteligente: int
+        +idRecinto: int
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+    }
+    class Transaccion {
+        +id: int
+        +datos: string
+        +fechaHora: datetime
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+    }
+    class RecintoTransaccion {
+        +id: int
+        +idRecintoContratoInteligente: int
+        +idTransaccion: int
+        +fechaHora: datetime       
+        +costoEth: double
+        +costoCRC: double
+        +costoUSD: double
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+    }    
+    class Nodo {
+        +id: int
+        +nombre: string
+        +estado: string
+        +ubicacion: string
+        +idRecinto: int
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+    }
+
+    %% Relaciones entre las clases
+    ProcesoProduccionAvicola "1" --> "N" ProcesoProduccionAvicolaEtapa 
+    Etapa "1" --> "N" ProcesoProduccionAvicolaEtapa 
+    ProcesoProduccionAvicolaEtapa "1" --> "N" ProcesoProduccionAvicolaEtapaEvento 
+    Evento  "1" --> "N" ProcesoProduccionAvicolaEtapaEvento 
+    Suministro  "1" --> "N"  SuministroProcesoProduccionAvicolaEtapa
+    TipoSuministro  "1" --> "N" Suministro
+    ProcesoProduccionAvicola "1" --> "N" SuministroProcesoProduccionAvicolaEtapa 
+    PolloLote  "1" --> "N" SuministroProcesoProduccionAvicolaEtapa 
+    SensorIoT "1" --> "N" SensorIoTLectura
+    SensorIoTLectura "1" --> "1"  ProcesoProduccionAvicolaEtapaEvento
+    ProcesoProduccionAvicolaEtapaEvento "1" --> "N"   NotificacionUsuarioRecinto   
+    Recinto "1" --> "N"   Galpon
+    Recinto "1" --> "N"   TipoRecinto
+    Galpon  "1" --> "N"  GalponPolloLote 
+    PolloLote "1" --> "N"  GalponPolloLote 
+    Usuario "1" --> "N" UsuarioRecinto 
+    Persona "1" --> "N" Usuario 
+    Recinto "1" --> "N"   UsuarioRecinto
+    Notificacion "1" --> "N"   NotificacionUsuarioRecinto
+    UsuarioRecinto "1" --> "N"   NotificacionUsuarioRecinto
+    Recinto "1" --> "N"   Nodo
+    Recinto "1" --> "N"   RecintoContratoInteligente
+    ContratoInteligente "1" --> "N"  RecintoContratoInteligente
+    Transaccion"1" --> "N" RecintoContratoInteligente
+    Recinto "1" --> "N"   RecintoTransaccion
+    Transaccion"1" --> "N" RecintoTransaccion

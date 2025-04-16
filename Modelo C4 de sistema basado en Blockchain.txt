@@ -1,0 +1,175 @@
+workspace "Sistema Blockchain Ethereum" {
+
+    model {
+        
+        UsuarioFinal = person "Usuario Final" "Persona que interactúa para consultar con la App"
+        UsuarioRegistrador = person "Usuario registrador" "Persona que registra datos en el App"
+        UsuarioAdmin = person "Usuario administrador" "Persona que administra el App"
+
+        UbiBotIotPlatform = softwareSystem "UbiBot Platform" "UbiBot IoT Platform" "Aplicación Web" {
+            UbiBotIotPlatformAPI = container "API" "Api RESTFULL" "" "Aplicación Web" 
+            UbiBotIotPlatformUbiHTTP = container "UbiHTTP" "HTTP interaction services" "" "Aplicación Web" 
+            UbiBotIotPlatformWhatsApp = container "WhatsApp" "Alertas por WhatsApp" "" "" 
+        }
+        softwareTrazabilidad = softwareSystem "Sistema trazabilidad de productos" { 
+            BlockchainEthereum = container "Ethereum Blockchain" "Blockchain descentralizada para contratos inteligentes y almacenamiento seguro de datos" "X" "Servicio Externo" {
+                
+                Ethereum = component "Ethereum" "EVM" "Procesa transacciones y ejecuta contratos inteligentes"
+                SmartContracts = component "Contratos Inteligentes" "Solidity" "Implementa lógica de negocio descentralizada"
+            }
+    
+            AplicacionWeb = container "Aplicación Web" "App que proporciona una interfaz para interactuar con la blockchain" "C # .net Core" "Aplicación Web"{
+                
+               AplicacionUI = component "Interfaz de Usuario" "Vue.js" "Proporciona UI" 
+               Razor = component "Motor de plantillas" "Razor" "Motor de plantillas"
+               EntityFrameworkCore = component "Mapeador de objetos relacional" "Entity Framework Core" "ORM"
+               HttpClient =  component "Conector al API" "HttpClient" "Proporciona una conexion al API RESTFULL" 
+            }
+            AplicacionMovilAndroid = container "Aplicacion móvil Android" "Aplicacion movil que proporciona una interfaz para interactuar con la blockchain" "Kotlin" "Aplicacion móvil"{
+                
+                JetpackCompose = component "Interfaz de Usuario" "Jetpack Compose" "Proporciona UI" "movil"
+                Hilt = component "Inyector de dependencias" "Dagger-Hilt" "Proporciona un administrador de dependencias"
+                Retrofit = component "Cliente HTTP" "Retrofit" "Gestiona la conexión con el API"
+                FirebaseBoom = component "FireBase Boom" "Fire base" "Conexion con Firebase"
+                FirebaseML = component "FireBase ML kit" "Fire base ML" "Reconocimiento de codigos QR"
+            }
+            AplicacionMovil_iOS = container "Aplicacion móvil iOS" "Aplicación móvil para interactuar con la blockchain en iOS" "Swift" "Aplicación móvil" {
+                
+                SwiftUI = component "Interfaz de Usuario" "SwiftUI" "Proporciona UI" "movil"
+                Combine = component "Inyector de dependencias y manejo de datos reactivos" "Combine" "Gestión de estados reactivos y eventos asincrónicos"
+                Alamofire = component "Cliente HTTP" "Alamofire" "Gestiona la conexión con el API RESTful"
+                FirebaseBoom__iOS = component "Conexión con Firebase" "Firebase SDK" "Conexión con Firebase para autenticación y almacenamiento"
+                FirebaseML_iOS = component "Firebase ML Kit" "Firebase ML" "Reconocimiento de códigos QR y análisis de imágenes"
+                SwiftPackageManager = component "Gestor de dependencias" "Swift Package Manager" "Gestión de dependencias en Swift"
+            }
+
+    
+            BackendAPI = container "Backend API" "Servicio intermedio que indexa datos y expone APIs para mejorar la experiencia" ".NET Core" "Aplicación Web" {
+               
+                ORM = component "API ORM" "Entity FrameworkCore" "Gestiona la conexion a la base de datos"
+                BlockchainConnect = component "Nethereum Web 3" "Nethereum" "Gestiona la conexión con la blockchain" 
+                BlockchainAuthentication = component "Nethereum Metamask " "MetaMask" "Firma transacciones y gestiona claves privadas"
+            }
+            DB = container "Base de Datos"  "SQL server / PostgreSQL" "Almacena datos auxiliares" "Base de Datos" {
+                
+            }
+            Sensores = container "Sensores" "Sensores de factores ambientales UbiBot " "Hardware" "Servicio Externo" {
+                UbiBotWaterTemperatureProbe = component "UbiBot temperatura del agua" "UbiBot DS18B20 Temperature Probe" "Sonda para medir temperatura del agua"
+                UbiBotEnviroment = component "UbiBot entorno" "UbiBot WS1 Pro" "Monitor inalambrico de ambiente"
+                UbiBotWind = component "UbiBot viento" "UbiBot Wind Speed Sensor" "Sensor de velocidad"
+            }
+           
+            
+        }
+       
+        UsuarioFinal -> AplicacionMovilAndroid "Usa la aplicación"
+        UsuarioFinal -> AplicacionMovil_iOS "Usa la aplicación"
+        UsuarioRegistrador  -> AplicacionWeb "Usa la aplicación"
+        UsuarioAdmin ->  AplicacionWeb "Usa la aplicación"
+        AplicacionWeb -> BackendAPI "Realiza transacciones y consulta información"
+        BackendAPI -> BlockchainEthereum "Monitorea eventos y gestiona datos"
+        BackendAPI -> DB "Almacena datos fuera de la blockchain"
+        AplicacionMovilAndroid ->  BackendAPI "Consulta y escribe datos"
+        AplicacionMovil_iOS  -> BackendAPI "Consulta y escribe datos"
+        ORM -> DB "Consulta y escribe datos"
+        BlockchainAuthentication -> BlockchainEthereum "Interactua con el Blockchain"
+        BlockchainConnect -> BlockchainEthereum  "Interactua con el Blockchain"
+        Sensores -> UbiBotIotPlatform "Envian datos"
+        BackendAPI -> UbiBotIotPlatformAPI "Consulta datos de los sensores"
+        UbiBotIotPlatformUbiHTTP -> BackendAPI "Envia alertas"
+        UbiBotIotPlatformWhatsApp -> AplicacionMovilAndroid "Envia alertas"
+        UbiBotIotPlatformWhatsApp -> AplicacionMovil_iOS "Envia alertas"
+        
+        UsuarioFinal -> JetpackCompose "Usa"
+        UsuarioRegistrador -> AplicacionUI "Usa"
+        AplicacionUI -> BackendAPI "Solicita datos y envía transacciones"
+        BlockchainConnect -> BlockchainAuthentication "Solicita firma de transacciones"
+        Ethereum -> SmartContracts "Ejecuta lógica"
+        SmartContracts -> Ethereum "Almacena estado"
+        
+        BackendAPI -> Ethereum "Monitorea eventos"
+    }
+
+    views {
+        systemContext softwareTrazabilidad {
+            include *
+            autolayout lr
+            title "Sistema Blockchain basado en Ethereum"
+        }
+        container softwareTrazabilidad {
+            
+            include *
+            autolayout lr
+            title "Contenedores de la Aplicación Web / Móvil"
+        }
+        container UbiBotIotPlatform {
+            
+            include *
+            autolayout lr
+            title "Contenedores de UbiBot Iot Platform"
+        }
+        component BlockchainEthereum {
+          
+            include *
+            autolayout lr
+            title "Componentes del Ethereum Blockchain"
+        }
+        component AplicacionWeb {
+          
+            include *
+            autolayout lr
+            title "Componente web del sistema"
+        }
+        component AplicacionMovilAndroid {
+          
+            include *
+            autolayout lr
+            title "Componente movil Android del sistema"
+        }
+        component AplicacionMovil_iOS {
+          
+            include *
+            autolayout lr
+            title "Componente movil iOS del sistema"
+        }
+        component BackendAPI {
+          
+            include *
+            autolayout lr
+            title "Componentes del Backend API"
+        }
+        
+        component Sensores {
+          
+            include *
+            autolayout lr
+            title "Tipos de sensores"
+        }
+        theme default
+        styles {
+
+            element "Aplicacion móvil Android" {
+                shape MobileDeviceLandscape
+            }
+            element "Aplicacion móvil iOS" {
+                shape MobileDeviceLandscape
+            }
+            
+            element "Aplicación Web" {
+                shape WebBrowser
+            }
+
+            element "Base de Datos"{
+                shape Cylinder
+                background #999999
+            }
+             element "Servicio Externo" {
+                shape Component
+                background #999999
+            }
+
+        }
+
+
+    }
+}

@@ -1,0 +1,149 @@
+classDiagram
+    class ProcesoProduccionAvicola {
+        +int idProceso
+        +string etapaActual
+        +date fechaInicio
+        +date fechaFin
+        +datetime created_at
+        +string created_user
+        +datetime updated_at
+        +string lastUserChange
+        +boolean crearProcesoProduccionAvicola(ProcesoProduccionAvicola proceso)
+        +boolean actualizarProcesoProduccionAvicola(int id, ProcesoProduccionAvicola proceso)
+        +boolean eliminarProcesoProduccionAvicola(int id)
+        +ProcesoProduccionAvicola obtenerProcesoProduccionAvicola(int id)
+        +List~ProcesoProduccionAvicola~ listarProcesosProduccionAvicola()
+        +boolean agregarEtapaAProceso(int idProceso, Etapa etapa)
+        +boolean registrarEventoEnProceso(int idProceso, Evento evento)
+        +boolean finalizarProcesoProduccionAvicola(int idProceso)
+    }
+
+    class Etapa {
+        +int idEtapa
+        +string nombre
+        +string descripcion
+        +int duracionEstimada
+        +datetime created_at
+        +string created_user
+        +datetime updated_at
+        +string lastUserChange
+        +boolean crearEtapa(Etapa etapa)
+        +boolean actualizarEtapa(int id, Etapa etapa)
+        +boolean eliminarEtapa(int id)
+        +Etapa obtenerEtapa(int id)
+        +List~Etapa~ listarEtapas()
+    }
+
+    class Evento {
+        +int idEvento
+        +string tipo
+        +datetime timestamp
+        +string datos
+        +int idProceso
+        +datetime created_at
+        +string created_user
+        +datetime updated_at
+        +string lastUserChange
+        +boolean crearEvento(Evento evento)
+        +boolean actualizarEvento(int id, Evento evento)
+        +boolean eliminarEvento(int id)
+        +Evento obtenerEvento(int id)
+        +List~Evento~ listarEventos()
+        +boolean asociarSensorAEvento(int idEvento, SensorIoT sensor)
+    }
+
+    class SensorIoT {
+        +int idSensor
+        +string tipo
+        +string ubicacion
+        +datetime created_at
+        +string created_user
+        +datetime updated_at
+        +string lastUserChange
+        +boolean registrarSensor(SensorIoT sensor)
+        +boolean actualizarSensor(int id, SensorIoT sensor)
+        +boolean eliminarSensor(int id)
+        +SensorIoT obtenerSensor(int id)
+        +List~SensorIoT~ listarSensores()
+    }
+
+    class Usuario {
+        +int idUsuario
+        +string nombre
+        +string rol
+        +datetime created_at
+        +string created_user
+        +datetime updated_at
+        +string lastUserChange
+        +boolean crearUsuario(Usuario usuario)
+        +boolean actualizarUsuario(int id, Usuario usuario)
+        +boolean eliminarUsuario(int id)
+        +Usuario obtenerUsuario(int id)
+        +List~Usuario~ listarUsuarios()
+        +boolean autenticarUsuario(string nombre, string password)
+    }
+
+    class Notificacion {
+        +int idNotificacion
+        +string mensaje
+        +datetime fechaEnvio
+        +int idUsuario
+        +datetime created_at
+        +string created_user
+        +datetime updated_at
+        +string lastUserChange
+        +boolean crearNotificacion(Notificacion notificacion)
+        +boolean actualizarNotificacion(int id, Notificacion notificacion)
+        +boolean eliminarNotificacion(int id)
+        +Notificacion obtenerNotificacion(int id)
+        +List~Notificacion~ listarNotificaciones()
+        +boolean enviarNotificacion(int idUsuario, Notificacion notificacion)
+    }
+
+    class ContratoInteligente {
+        +int idContrato
+        +string direccionContrato
+        +datetime created_at
+        +string created_user
+        +datetime updated_at
+        +string lastUserChange
+        +boolean desplegarContrato(ContratoInteligente contrato)
+        +boolean actualizarContrato(int id, ContratoInteligente contrato)
+        +boolean eliminarContrato(int id)
+        +ContratoInteligente obtenerContrato(int id)
+        +List~ContratoInteligente~ listarContratos()
+        +boolean interactuarConContrato(int idContrato, string datos)
+    }
+
+    class Transaccion {
+        +int idTransaccion
+        +string datos
+        +datetime timestamp
+        +int idContrato
+        +datetime created_at
+        +string created_user
+        +datetime updated_at
+        +string lastUserChange
+        +boolean crearTransaccion(Transaccion transaccion)
+        +boolean actualizarTransaccion(int id, Transaccion transaccion)
+        +boolean eliminarTransaccion(int id)
+        +Transaccion obtenerTransaccion(int id)
+        +List~Transaccion~ listarTransacciones()
+        +boolean validarTransaccion(int idTransaccion)
+    }
+
+    class Nodo {
+        +int idNodo
+        +string estado
+        +datetime created_at
+        +string created_user
+        +datetime updated_at
+        +string lastUserChange
+        +boolean registrarNodo(Nodo nodo)
+        +boolean actualizarNodo(int id, Nodo nodo)
+        +boolean eliminarNodo(int id)
+        +Nodo obtenerNodo(int id)
+        +List~Nodo~ listarNodos()
+        +boolean cambiarEstadoNodo(int id, string nuevoEstado)
+        +boolean validarTransaccionEnNodo(int idNodo, int idTransaccion)
+    }
