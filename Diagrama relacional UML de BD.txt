@@ -118,6 +118,7 @@ classDiagram
     }   
     class PolloLote {
         +id: int
+        +idHuevoFertilLote: int
         +nombre: string
         +numeroLote: string
         +numeroJuliano: int?
@@ -194,8 +195,11 @@ classDiagram
     class CierreSemanalLote {
         +id: int
         +idPolloLote: int        
-        +fechaHora: datetime
-        +peso: int
+        +fechaHora: datetime       
+        +numeroSemana: int
+        +pesoPromedio: double
+        +consumoPromedio: double
+        +uniformidad: double
         +estado: bit
         +created_at: datetime
         +created_user: string
@@ -366,9 +370,59 @@ classDiagram
         +created_user: string
         +updated_at: datetime
         +lastUserChange: string
+    }    
+    class HuevoFertilLote {
+        +id: int
+        +numeroLote: string
+        +idGalpon: int
+        +fechaProduccion: datetime
+        +cantidad: int
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+    }
+      class HuevoFertilLoteMaquina {
+        +id: int
+        +idHuevoFertil: int
+        +idMaquina: int
+        +fechaHoraInicio: datetime
+        +fechaHoraFinal: datetime        
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+    }
+    class LoteReproductoras {
+        +id: int
+        +codigo: string
+        +lineaGenetica: string
+        +fechaIngreso: datetime
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+    }
+    class LoteReproductorasHuevoFertilLote {
+        +id: int
+        +idHuevoFertilLote : int
+        +idLoteReproductoras: int
+        +fechaRecoleccion: datetime
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
     }
 
     %% Relaciones entre las clases
+    HuevoFertilLote  "1" --> "1" PolloLote
+    HuevoFertilLote  "1" --> "1" Galpon
+    HuevoFertilLote "N" --> "1" LoteReproductoras
+    PolloLote "1" --> "N" HuevoFertilLote
     ProcesoProduccionAvicola "1" --> "N" ProcesoProduccionAvicolaEtapa 
     Etapa "1" --> "N" ProcesoProduccionAvicolaEtapa 
     ProcesoProduccionAvicolaEtapa "1" --> "N" ProcesoProduccionAvicolaEtapaEvento 
@@ -383,6 +437,7 @@ classDiagram
     Recinto "1" --> "N"   Galpon
     Recinto "1" --> "N"   TipoRecinto
     Galpon  "1" --> "N"  GalponPolloLote 
+    Galpon  "1" --> "N"  HuevoFertilLote
     PolloLote "1" --> "N"  GalponPolloLote 
     Usuario "1" --> "N" UsuarioRecinto 
     Persona "1" --> "N" Usuario 
@@ -403,3 +458,8 @@ classDiagram
     PolloLote "1" --> "N"  CierreSemanalLote
     PolloLote "1" --> "N"  RecintoPolloLote
     Recinto  "1" --> "N"  RecintoPolloLote
+    HuevoFertilLote "1" --> "N"   HuevoFertilLoteMaquina
+    Maquina "1" --> "N"   HuevoFertilLoteMaquina
+    HuevoFertilLote "1" --> "N" PolloLote
+    LoteReproductoras "1" --> "N" LoteReproductorasHuevoFertilLote
+    HuevoFertilLote "1" --> "N" LoteReproductorasHuevoFertilLote
