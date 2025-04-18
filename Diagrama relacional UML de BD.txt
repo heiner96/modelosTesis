@@ -517,8 +517,9 @@ classDiagram
     }
 
     %% Relaciones entre las clases
+    PolloLote "1" --> "N"  EntregaPolloLote
     EntregaPolloLote "1" --> "N"  EntregaPolloLoteClienteDistribuidor
-    ClienteDistribuidor "1" --> "N"  EntregaPolloLoteClienteDistribuidor    
+    ClienteDistribuidor "1" --> "N"  EntregaPolloLoteClienteDistribuidor
     RecintoPolloLote "1" --> "N" RecintoPolloLoteProcesoProduccionAvicolaEtapaEvento
     ProcesoProduccionAvicolaEtapaEvento "1" --> "N" RecintoPolloLoteProcesoProduccionAvicolaEtapaEvento
     Usuario  "1" --> "N" Inspeccion
