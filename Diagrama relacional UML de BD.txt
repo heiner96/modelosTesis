@@ -124,6 +124,8 @@ classDiagram
         +numeroJuliano: int?
         +cantidadHuevos: int?
         +cantidadPollos: int?
+        +pesoPromedioPie: double?
+        +pesoPromedioCanal: double?
         +fechaHoraNacimiento : datetime
         +estado: bit
         +created_at: datetime
@@ -238,6 +240,19 @@ classDiagram
         +idPolloLote: int
         +fechaHoraIngreso: datetime?
         +fechaHoraSalida: datetime?
+        +codigoBoleta: string?
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+    }
+    class PesajeRecintoPolloLote {
+        +id: int
+        +idRecintoPolloLote: int
+        +tipoRomana: string 
+        +peso: double
+        +fechaHora: datetime
         +estado: bit
         +created_at: datetime
         +created_user: string
@@ -417,8 +432,101 @@ classDiagram
         +updated_at: datetime
         +lastUserChange: string
     }
+    class Inspeccion {
+        +id: int               
+        +idUsuario: int
+        +resultado: string
+        +fecha: datetime
+        +tipo: string 
+        +resuelto: boolean
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+    }
+    class InspeccionRecinto {
+        +id: int
+        +idInspeccion: int
+        +idRecinto: int
+        +fecha: datetime
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+    }
+    class InspeccionProcesoProduccionAvicolaEtapa {
+        +id: int
+        +idProcesoProduccionAvicolaEtapa: int     
+        +idInspeccion: int
+        +fecha: datetime
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+    }
+    class RecintoPolloLoteProcesoProduccionAvicolaEtapaEvento {
+        +id: int
+        +idRecintoPolloLote: int     
+        +idProcesoProduccionAvicolaEtapaEvento: int
+        +fecha: datetime
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+    }
+    class EntregaPolloLote {
+        +id: int
+        +idPolloLote: int       
+        +fechaEntrega: datetime
+        +cantidadEntregada: int
+        +pesoEntregado: double
+        +observaciones: string
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+    }
+    class EntregaPolloLoteClienteDistribuidor {
+        +id: int        
+        +idClienteDistribuidor: int
+        +idEntregaPolloLote: int       
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+    }
+    class ClienteDistribuidor {
+        +id: int
+        +nombre: string
+        +identificacion: string
+        +tipoIdentificacion: string
+        +telefono: string
+        +correo: string
+        +direccion: string
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+    }
 
     %% Relaciones entre las clases
+    EntregaPolloLote "1" --> "N"  EntregaPolloLoteClienteDistribuidor
+    ClienteDistribuidor "1" --> "N"  EntregaPolloLoteClienteDistribuidor
+    PolloLote "1" --> "N" ClienteDistribuidor
+    RecintoPolloLote "1" --> "N" RecintoPolloLoteProcesoProduccionAvicolaEtapaEvento
+    ProcesoProduccionAvicolaEtapaEvento "1" --> "N" RecintoPolloLoteProcesoProduccionAvicolaEtapaEvento
+    Usuario  "1" --> "N" Inspeccion
+    ProcesoProduccionAvicolaEtapa  "1" --> "N"  InspeccionProcesoProduccionAvicolaEtapa
+    Inspeccion "1" --> "N" InspeccionProcesoProduccionAvicolaEtapa
+    Inspeccion "1" --> "N" InspeccionRecinto
+    Recinto "1" --> "N" InspeccionRecinto
     HuevoFertilLote  "1" --> "1" PolloLote
     HuevoFertilLote  "1" --> "1" Galpon
     HuevoFertilLote "N" --> "1" LoteReproductoras
@@ -463,3 +571,4 @@ classDiagram
     HuevoFertilLote "1" --> "N" PolloLote
     LoteReproductoras "1" --> "N" LoteReproductorasHuevoFertilLote
     HuevoFertilLote "1" --> "N" LoteReproductorasHuevoFertilLote
+    RecintoPolloLote "1" --> "N" PesajeRecintoPolloLote
