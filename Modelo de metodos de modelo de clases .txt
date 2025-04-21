@@ -14,12 +14,12 @@ classDiagram
         +created_user: string
         +updated_at: datetime
         +lastUserChange: string
-        --
+        
         +create(): ProcesoProduccionAvicola
         +read(id: int): ProcesoProduccionAvicola
         +update(): void
         +delete(): void
-        --
+        
         +setCreatedAt(dt: datetime): void
         +getCreatedAt(): datetime
         +setCreatedUser(u: string): void
@@ -28,7 +28,7 @@ classDiagram
         +getUpdatedAt(): datetime
         +setLastUserChange(u: string): void
         +getLastUserChange(): string
-        --
+        
         +activate(): void
         +deactivate(): void
         +filtroPorFecha(start: datetime, end: datetime): List~ProcesoProduccionAvicola~
@@ -42,12 +42,12 @@ classDiagram
         +created_user: string
         +updated_at: datetime
         +lastUserChange: string
-        --
+        
         +create(): Etapa
         +read(id: int): Etapa
         +update(): void
         +delete(): void
-        --
+        
         +setCreatedAt(dt: datetime): void
         +getCreatedAt(): datetime
         +setCreatedUser(u: string): void
@@ -56,7 +56,7 @@ classDiagram
         +getUpdatedAt(): datetime
         +setLastUserChange(u: string): void
         +getLastUserChange(): string
-        --
+        
         +activate(): void
         +deactivate(): void
         +filtroPorFecha(start: datetime, end: datetime): List~Etapa~
@@ -71,12 +71,12 @@ classDiagram
         +created_user: string
         +updated_at: datetime
         +lastUserChange: string
-        --
+        
         +create(): ProcesoProduccionAvicolaEtapa
         +read(id: int): ProcesoProduccionAvicolaEtapa
         +update(): void
         +delete(): void
-        --
+        
         +setCreatedAt(dt: datetime): void
         +getCreatedAt(): datetime
         +setCreatedUser(u: string): void
@@ -85,7 +85,7 @@ classDiagram
         +getUpdatedAt(): datetime
         +setLastUserChange(u: string): void
         +getLastUserChange(): string
-        --
+        
         +activate(): void
         +deactivate(): void
         +filtroPorFecha(start: datetime, end: datetime): List~ProcesoProduccionAvicolaEtapa~
@@ -103,12 +103,12 @@ classDiagram
         +created_user: string
         +updated_at: datetime
         +lastUserChange: string
-        --
+        
         +create(): ProcesoProduccionAvicolaEtapaEvento
         +read(id: int): ProcesoProduccionAvicolaEtapaEvento
         +update(): void
         +delete(): void
-        --
+        
         +setCreatedAt(dt: datetime): void
         +getCreatedAt(): datetime
         +setCreatedUser(u: string): void
@@ -117,7 +117,7 @@ classDiagram
         +getUpdatedAt(): datetime
         +setLastUserChange(u: string): void
         +getLastUserChange(): string
-        --
+        
         +activate(): void
         +deactivate(): void
         +filtroPorFecha(start: datetime, end: datetime): List~ProcesoProduccionAvicolaEtapaEvento~
@@ -132,12 +132,12 @@ classDiagram
         +created_user: string
         +updated_at: datetime
         +lastUserChange: string
-        --
+        
         +create(): Evento
         +read(id: int): Evento
         +update(): void
         +delete(): void
-        --
+        
         +setCreatedAt(dt: datetime): void
         +getCreatedAt(): datetime
         +setCreatedUser(u: string): void
@@ -146,7 +146,7 @@ classDiagram
         +getUpdatedAt(): datetime
         +setLastUserChange(u: string): void
         +getLastUserChange(): string
-        --
+        
         +activate(): void
         +deactivate(): void
         +filtroPorFecha(start: datetime, end: datetime): List~Evento~
@@ -162,12 +162,12 @@ classDiagram
         +created_user: string
         +updated_at: datetime
         +lastUserChange: string
-        --
+        
         +create(): SensorIoT
         +read(id: int): SensorIoT
         +update(): void
         +delete(): void
-        --
+        
         +setCreatedAt(dt: datetime): void
         +getCreatedAt(): datetime
         +setCreatedUser(u: string): void
@@ -176,7 +176,7 @@ classDiagram
         +getUpdatedAt(): datetime
         +setLastUserChange(u: string): void
         +getLastUserChange(): string
-        --
+        
         +activate(): void
         +deactivate(): void
         +filtroPorFecha(start: datetime, end: datetime): List~SensorIoT~
@@ -193,12 +193,12 @@ classDiagram
         +created_user: string
         +updated_at: datetime
         +lastUserChange: string
-        --
+        
         +create(): SensorIoTLectura
         +read(id: int): SensorIoTLectura
         +update(): void
         +delete(): void
-        --
+        
         +setCreatedAt(dt: datetime): void
         +getCreatedAt(): datetime
         +setCreatedUser(u: string): void
@@ -207,7 +207,7 @@ classDiagram
         +getUpdatedAt(): datetime
         +setLastUserChange(u: string): void
         +getLastUserChange(): string
-        --
+        
         +activate(): void
         +deactivate(): void
         +filtroPorFecha(start: datetime, end: datetime): List~SensorIoTLectura~
@@ -222,12 +222,12 @@ classDiagram
         +created_user: string
         +updated_at: datetime
         +lastUserChange: string
-        --
+        
         +create(): SuministroProcesoProduccionAvicolaEtapa
         +read(id: int): SuministroProcesoProduccionAvicolaEtapa
         +update(): void
         +delete(): void
-        --
+        
         +setCreatedAt(dt: datetime): void
         +getCreatedAt(): datetime
         +setCreatedUser(u: string): void
@@ -236,7 +236,7 @@ classDiagram
         +getUpdatedAt(): datetime
         +setLastUserChange(u: string): void
         +getLastUserChange(): string
-        --
+        
         +activate(): void
         +deactivate(): void
         +filtroPorFecha(start: datetime, end: datetime): List~SuministroProcesoProduccionAvicolaEtapa~
@@ -253,12 +253,12 @@ classDiagram
         +created_user: string
         +updated_at: datetime
         +lastUserChange: string
-        --
+        
         +create(): Suministro
         +read(id: int): Suministro
         +update(): void
         +delete(): void
-        --
+        
         +setCreatedAt(dt: datetime): void
         +getCreatedAt(): datetime
         +setCreatedUser(u: string): void
@@ -267,7 +267,7 @@ classDiagram
         +getUpdatedAt(): datetime
         +setLastUserChange(u: string): void
         +getLastUserChange(): string
-        --
+        
         +activate(): void
         +deactivate(): void
         +filtroPorFecha(start: datetime, end: datetime): List~Suministro~
@@ -281,12 +281,12 @@ classDiagram
         +created_user: string
         +updated_at: datetime
         +lastUserChange: string
-        --
+        
         +create(): TipoSuministro
         +read(id: int): TipoSuministro
         +update(): void
         +delete(): void
-        --
+        
         +setCreatedAt(dt: datetime): void
         +getCreatedAt(): datetime
         +setCreatedUser(u: string): void
@@ -295,7 +295,7 @@ classDiagram
         +getUpdatedAt(): datetime
         +setLastUserChange(u: string): void
         +getLastUserChange(): string
-        --
+        
         +activate(): void
         +deactivate(): void
         +filtroPorFecha(start: datetime, end: datetime): List~TipoSuministro~
@@ -316,12 +316,12 @@ classDiagram
         +created_user: string
         +updated_at: datetime
         +lastUserChange: string
-        --
+        
         +create(): PolloLote
         +read(id: int): PolloLote
         +update(): void
         +delete(): void
-        --
+        
         +setCreatedAt(dt: datetime): void
         +getCreatedAt(): datetime
         +setCreatedUser(u: string): void
@@ -330,7 +330,7 @@ classDiagram
         +getUpdatedAt(): datetime
         +setLastUserChange(u: string): void
         +getLastUserChange(): string
-        --
+        
         +activate(): void
         +deactivate(): void
         +filtroPorFecha(start: datetime, end: datetime): List~PolloLote~
@@ -346,7 +346,7 @@ classDiagram
         +created_user: string
         +updated_at: datetime
         +lastUserChange: string
-        --
+        
         +create(): GalponPolloLote
         +read(id: int): GalponPolloLote
         +update(): void
@@ -376,7 +376,7 @@ classDiagram
         +created_user: string
         +updated_at: datetime
         +lastUserChange: string
-        --
+        
         +create(): CierreSemanalLote
         +read(id: int): CierreSemanalLote
         +update(): void
@@ -403,7 +403,7 @@ classDiagram
         +created_user: string
         +updated_at: datetime
         +lastUserChange: string
-        --
+        
         +create(): Galpon
         +read(id: int): Galpon
         +update(): void
@@ -434,7 +434,7 @@ classDiagram
         +created_user: string
         +updated_at: datetime
         +lastUserChange: string
-        --
+        
         +create(): Recinto
         +read(id: int): Recinto
         +update(): void
@@ -463,7 +463,7 @@ classDiagram
         +created_user: string
         +updated_at: datetime
         +lastUserChange: string
-        --
+        
         +create(): RecintoPolloLote
         +read(id: int): RecintoPolloLote
         +update(): void
@@ -491,7 +491,7 @@ classDiagram
         +created_user: string
         +updated_at: datetime
         +lastUserChange: string
-        --
+        
         +create(): PesajeRecintoPolloLote
         +read(id: int): PesajeRecintoPolloLote
         +update(): void
@@ -517,7 +517,7 @@ classDiagram
         +created_user: string
         +updated_at: datetime
         +lastUserChange: string
-        --
+        
         +create(): TipoRecinto
         +read(id: int): TipoRecinto
         +update(): void
@@ -546,7 +546,7 @@ classDiagram
         +created_user: string
         +updated_at: datetime
         +lastUserChange: string
-        --
+        
         +create(): Persona
         +read(id: int): Persona
         +update(): void
@@ -574,7 +574,7 @@ classDiagram
         +created_user: string
         +updated_at: datetime
         +lastUserChange: string
-        --
+        
         +create(): Usuario
         +read(id: int): Usuario
         +update(): void
@@ -601,7 +601,7 @@ classDiagram
         +created_user: string
         +updated_at: datetime
         +lastUserChange: string
-        --
+        
         +create(): UsuarioRecinto
         +read(id: int): UsuarioRecinto
         +update(): void
@@ -630,7 +630,7 @@ classDiagram
         +created_user: string
         +updated_at: datetime
         +lastUserChange: string
-        --
+        
         +create(): NotificacionUsuarioRecinto
         +read(id: int): NotificacionUsuarioRecinto
         +update(): void
@@ -656,7 +656,7 @@ classDiagram
         +created_user: string
         +updated_at: datetime
         +lastUserChange: string
-        --
+        
         +create(): Notificacion
         +read(id: int): Notificacion
         +update(): void
@@ -684,7 +684,7 @@ classDiagram
         +created_user: string
         +updated_at: datetime
         +lastUserChange: string
-        --
+        
         +create(): ContratoInteligente
         +read(id: int): ContratoInteligente
         +update(): void
@@ -710,7 +710,7 @@ classDiagram
         +created_user: string
         +updated_at: datetime
         +lastUserChange: string
-        --
+        
         +create(): RecintoContratoInteligente
         +read(id: int): RecintoContratoInteligente
         +update(): void
@@ -736,7 +736,7 @@ classDiagram
         +created_user: string
         +updated_at: datetime
         +lastUserChange: string
-        --
+        
         +create(): Transaccion
         +read(id: int): Transaccion
         +update(): void
@@ -766,7 +766,7 @@ classDiagram
         +created_user: string
         +updated_at: datetime
         +lastUserChange: string
-        --
+        
         +create(): RecintoTransaccion
         +read(id: int): RecintoTransaccion
         +update(): void
@@ -794,7 +794,7 @@ classDiagram
         +created_user: string
         +updated_at: datetime
         +lastUserChange: string
-        --
+        
         +create(): Nodo
         +read(id: int): Nodo
         +update(): void
@@ -822,7 +822,7 @@ classDiagram
         +created_user: string
         +updated_at: datetime
         +lastUserChange: string
-        --
+        
         +create(): HuevoFertilLote
         +read(id: int): HuevoFertilLote
         +update(): void
@@ -850,7 +850,7 @@ classDiagram
         +created_user: string
         +updated_at: datetime
         +lastUserChange: string
-        --
+        
         +create(): HuevoFertilLoteMaquina
         +read(id: int): HuevoFertilLoteMaquina
         +update(): void
@@ -877,7 +877,7 @@ classDiagram
         +created_user: string
         +updated_at: datetime
         +lastUserChange: string
-        --
+        
         +create(): LoteReproductoras
         +read(id: int): LoteReproductoras
         +update(): void
@@ -904,7 +904,7 @@ classDiagram
         +created_user: string
         +updated_at: datetime
         +lastUserChange: string
-        --
+        
         +create(): LoteReproductorasHuevoFertilLote
         +read(id: int): LoteReproductorasHuevoFertilLote
         +update(): void
@@ -933,7 +933,7 @@ classDiagram
         +created_user: string
         +updated_at: datetime
         +lastUserChange: string
-        --
+        
         +create(): Inspeccion
         +read(id: int): Inspeccion
         +update(): void
@@ -960,7 +960,7 @@ classDiagram
         +created_user: string
         +updated_at: datetime
         +lastUserChange: string
-        --
+        
         +create(): InspeccionRecinto
         +read(id: int): InspeccionRecinto
         +update(): void
@@ -987,7 +987,7 @@ classDiagram
         +created_user: string
         +updated_at: datetime
         +lastUserChange: string
-        --
+        
         +create(): InspeccionProcesoProduccionAvicolaEtapa
         +read(id: int): InspeccionProcesoProduccionAvicolaEtapa
         +update(): void
@@ -1014,7 +1014,7 @@ classDiagram
         +created_user: string
         +updated_at: datetime
         +lastUserChange: string
-        --
+        
         +create(): RecintoPolloLoteProcesoProduccionAvicolaEtapaEvento
         +read(id: int): RecintoPolloLoteProcesoProduccionAvicolaEtapaEvento
         +update(): void
@@ -1043,7 +1043,7 @@ classDiagram
         +created_user: string
         +updated_at: datetime
         +lastUserChange: string
-        --
+        
         +create(): EntregaPolloLote
         +read(id: int): EntregaPolloLote
         +update(): void
@@ -1069,7 +1069,7 @@ classDiagram
         +created_user: string
         +updated_at: datetime
         +lastUserChange: string
-        --
+        
         +create(): EntregaPolloLoteClienteDistribuidor
         +read(id: int): EntregaPolloLoteClienteDistribuidor
         +update(): void
@@ -1099,7 +1099,7 @@ classDiagram
         +created_user: string
         +updated_at: datetime
         +lastUserChange: string
-        --
+        
         +create(): ClienteDistribuidor
         +read(id: int): ClienteDistribuidor
         +update(): void
@@ -1116,4 +1116,5 @@ classDiagram
         +deactivate(): void
         +filtroPorFecha(start: datetime, end: datetime): List~ClienteDistribuidor~
     }
+
 
