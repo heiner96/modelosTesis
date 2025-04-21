@@ -1,149 +1,1119 @@
+---
+config:
+  look: classic
+  layout: elk
+---
 classDiagram
+    direction TB
     class ProcesoProduccionAvicola {
-        +int idProceso
-        +string etapaActual
-        +date fechaInicio
-        +date fechaFin
-        +datetime created_at
-        +string created_user
-        +datetime updated_at
-        +string lastUserChange
-        +boolean crearProcesoProduccionAvicola(ProcesoProduccionAvicola proceso)
-        +boolean actualizarProcesoProduccionAvicola(int id, ProcesoProduccionAvicola proceso)
-        +boolean eliminarProcesoProduccionAvicola(int id)
-        +ProcesoProduccionAvicola obtenerProcesoProduccionAvicola(int id)
-        +List~ProcesoProduccionAvicola~ listarProcesosProduccionAvicola()
-        +boolean agregarEtapaAProceso(int idProceso, Etapa etapa)
-        +boolean registrarEventoEnProceso(int idProceso, Evento evento)
-        +boolean finalizarProcesoProduccionAvicola(int idProceso)
+        +id: int
+        +nombre: string
+        +descripcion: string
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+        --
+        +create(): ProcesoProduccionAvicola
+        +read(id: int): ProcesoProduccionAvicola
+        +update(): void
+        +delete(): void
+        --
+        +setCreatedAt(dt: datetime): void
+        +getCreatedAt(): datetime
+        +setCreatedUser(u: string): void
+        +getCreatedUser(): string
+        +setUpdatedAt(dt: datetime): void
+        +getUpdatedAt(): datetime
+        +setLastUserChange(u: string): void
+        +getLastUserChange(): string
+        --
+        +activate(): void
+        +deactivate(): void
+        +filtroPorFecha(start: datetime, end: datetime): List~ProcesoProduccionAvicola~
     }
-
     class Etapa {
-        +int idEtapa
-        +string nombre
-        +string descripcion
-        +int duracionEstimada
-        +datetime created_at
-        +string created_user
-        +datetime updated_at
-        +string lastUserChange
-        +boolean crearEtapa(Etapa etapa)
-        +boolean actualizarEtapa(int id, Etapa etapa)
-        +boolean eliminarEtapa(int id)
-        +Etapa obtenerEtapa(int id)
-        +List~Etapa~ listarEtapas()
+        +id: int
+        +nombre: string
+        +descripcion: string
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+        --
+        +create(): Etapa
+        +read(id: int): Etapa
+        +update(): void
+        +delete(): void
+        --
+        +setCreatedAt(dt: datetime): void
+        +getCreatedAt(): datetime
+        +setCreatedUser(u: string): void
+        +getCreatedUser(): string
+        +setUpdatedAt(dt: datetime): void
+        +getUpdatedAt(): datetime
+        +setLastUserChange(u: string): void
+        +getLastUserChange(): string
+        --
+        +activate(): void
+        +deactivate(): void
+        +filtroPorFecha(start: datetime, end: datetime): List~Etapa~
     }
-
+    class ProcesoProduccionAvicolaEtapa {
+        +id: int
+        +idEtapa: int
+        +idProcesoProduccionAvicola: int
+        +duracionEstimada: int
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+        --
+        +create(): ProcesoProduccionAvicolaEtapa
+        +read(id: int): ProcesoProduccionAvicolaEtapa
+        +update(): void
+        +delete(): void
+        --
+        +setCreatedAt(dt: datetime): void
+        +getCreatedAt(): datetime
+        +setCreatedUser(u: string): void
+        +getCreatedUser(): string
+        +setUpdatedAt(dt: datetime): void
+        +getUpdatedAt(): datetime
+        +setLastUserChange(u: string): void
+        +getLastUserChange(): string
+        --
+        +activate(): void
+        +deactivate(): void
+        +filtroPorFecha(start: datetime, end: datetime): List~ProcesoProduccionAvicolaEtapa~
+    }
+    class ProcesoProduccionAvicolaEtapaEvento {
+        +id: int
+        +idProcesoProduccionAvicolaEtapa: int
+        +idEvento: int
+        +idSensorIoTLectura: int?
+        +idPolloLote: int
+        +cantidadAfectada: int?
+        +fechaHora: datetime
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+        --
+        +create(): ProcesoProduccionAvicolaEtapaEvento
+        +read(id: int): ProcesoProduccionAvicolaEtapaEvento
+        +update(): void
+        +delete(): void
+        --
+        +setCreatedAt(dt: datetime): void
+        +getCreatedAt(): datetime
+        +setCreatedUser(u: string): void
+        +getCreatedUser(): string
+        +setUpdatedAt(dt: datetime): void
+        +getUpdatedAt(): datetime
+        +setLastUserChange(u: string): void
+        +getLastUserChange(): string
+        --
+        +activate(): void
+        +deactivate(): void
+        +filtroPorFecha(start: datetime, end: datetime): List~ProcesoProduccionAvicolaEtapaEvento~
+    }
     class Evento {
-        +int idEvento
-        +string tipo
-        +datetime timestamp
-        +string datos
-        +int idProceso
-        +datetime created_at
-        +string created_user
-        +datetime updated_at
-        +string lastUserChange
-        +boolean crearEvento(Evento evento)
-        +boolean actualizarEvento(int id, Evento evento)
-        +boolean eliminarEvento(int id)
-        +Evento obtenerEvento(int id)
-        +List~Evento~ listarEventos()
-        +boolean asociarSensorAEvento(int idEvento, SensorIoT sensor)
+        +id: int
+        +nombre: string
+        +tipo: string
+        +datos: string
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+        --
+        +create(): Evento
+        +read(id: int): Evento
+        +update(): void
+        +delete(): void
+        --
+        +setCreatedAt(dt: datetime): void
+        +getCreatedAt(): datetime
+        +setCreatedUser(u: string): void
+        +getCreatedUser(): string
+        +setUpdatedAt(dt: datetime): void
+        +getUpdatedAt(): datetime
+        +setLastUserChange(u: string): void
+        +getLastUserChange(): string
+        --
+        +activate(): void
+        +deactivate(): void
+        +filtroPorFecha(start: datetime, end: datetime): List~Evento~
     }
-
     class SensorIoT {
-        +int idSensor
-        +string tipo
-        +string ubicacion
-        +datetime created_at
-        +string created_user
-        +datetime updated_at
-        +string lastUserChange
-        +boolean registrarSensor(SensorIoT sensor)
-        +boolean actualizarSensor(int id, SensorIoT sensor)
-        +boolean eliminarSensor(int id)
-        +SensorIoT obtenerSensor(int id)
-        +List~SensorIoT~ listarSensores()
+        +id: int
+        +nombre: string
+        +modelo: string
+        +numeroSerial: string
+        +descripcion: string?
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+        --
+        +create(): SensorIoT
+        +read(id: int): SensorIoT
+        +update(): void
+        +delete(): void
+        --
+        +setCreatedAt(dt: datetime): void
+        +getCreatedAt(): datetime
+        +setCreatedUser(u: string): void
+        +getCreatedUser(): string
+        +setUpdatedAt(dt: datetime): void
+        +getUpdatedAt(): datetime
+        +setLastUserChange(u: string): void
+        +getLastUserChange(): string
+        --
+        +activate(): void
+        +deactivate(): void
+        +filtroPorFecha(start: datetime, end: datetime): List~SensorIoT~
     }
-
+    class SensorIoTLectura {
+        +id: int
+        +idSensorIoT: int
+        +valorRecuperado: string
+        +unidadMedida: string
+        +tipoLecturaAmbiental: string
+        +fechaHoraLectura: datetime
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+        --
+        +create(): SensorIoTLectura
+        +read(id: int): SensorIoTLectura
+        +update(): void
+        +delete(): void
+        --
+        +setCreatedAt(dt: datetime): void
+        +getCreatedAt(): datetime
+        +setCreatedUser(u: string): void
+        +getCreatedUser(): string
+        +setUpdatedAt(dt: datetime): void
+        +getUpdatedAt(): datetime
+        +setLastUserChange(u: string): void
+        +getLastUserChange(): string
+        --
+        +activate(): void
+        +deactivate(): void
+        +filtroPorFecha(start: datetime, end: datetime): List~SensorIoTLectura~
+    }
+    class SuministroProcesoProduccionAvicolaEtapa {
+        +id: int
+        +idSuministro: int
+        +idProcesoProduccionAvicolaEtapa: int
+        +idPolloLote: int
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+        --
+        +create(): SuministroProcesoProduccionAvicolaEtapa
+        +read(id: int): SuministroProcesoProduccionAvicolaEtapa
+        +update(): void
+        +delete(): void
+        --
+        +setCreatedAt(dt: datetime): void
+        +getCreatedAt(): datetime
+        +setCreatedUser(u: string): void
+        +getCreatedUser(): string
+        +setUpdatedAt(dt: datetime): void
+        +getUpdatedAt(): datetime
+        +setLastUserChange(u: string): void
+        +getLastUserChange(): string
+        --
+        +activate(): void
+        +deactivate(): void
+        +filtroPorFecha(start: datetime, end: datetime): List~SuministroProcesoProduccionAvicolaEtapa~
+    }
+    class Suministro {
+        +id: int
+        +idTipoSuministro: int
+        +nombre: string
+        +descripcion: string
+        +lote: string
+        +fabricante: string
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+        --
+        +create(): Suministro
+        +read(id: int): Suministro
+        +update(): void
+        +delete(): void
+        --
+        +setCreatedAt(dt: datetime): void
+        +getCreatedAt(): datetime
+        +setCreatedUser(u: string): void
+        +getCreatedUser(): string
+        +setUpdatedAt(dt: datetime): void
+        +getUpdatedAt(): datetime
+        +setLastUserChange(u: string): void
+        +getLastUserChange(): string
+        --
+        +activate(): void
+        +deactivate(): void
+        +filtroPorFecha(start: datetime, end: datetime): List~Suministro~
+    }
+    class TipoSuministro {
+        +id: int
+        +nombre: string
+        +descripcion: string
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+        --
+        +create(): TipoSuministro
+        +read(id: int): TipoSuministro
+        +update(): void
+        +delete(): void
+        --
+        +setCreatedAt(dt: datetime): void
+        +getCreatedAt(): datetime
+        +setCreatedUser(u: string): void
+        +getCreatedUser(): string
+        +setUpdatedAt(dt: datetime): void
+        +getUpdatedAt(): datetime
+        +setLastUserChange(u: string): void
+        +getLastUserChange(): string
+        --
+        +activate(): void
+        +deactivate(): void
+        +filtroPorFecha(start: datetime, end: datetime): List~TipoSuministro~
+    }
+    class PolloLote {
+        +id: int
+        +idHuevoFertilLote: int
+        +nombre: string
+        +numeroLote: string
+        +numeroJuliano: int?
+        +cantidadHuevos: int?
+        +cantidadPollos: int?
+        +pesoPromedioPie: double?
+        +pesoPromedioCanal: double?
+        +fechaHoraNacimiento: datetime
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+        --
+        +create(): PolloLote
+        +read(id: int): PolloLote
+        +update(): void
+        +delete(): void
+        --
+        +setCreatedAt(dt: datetime): void
+        +getCreatedAt(): datetime
+        +setCreatedUser(u: string): void
+        +getCreatedUser(): string
+        +setUpdatedAt(dt: datetime): void
+        +getUpdatedAt(): datetime
+        +setLastUserChange(u: string): void
+        +getLastUserChange(): string
+        --
+        +activate(): void
+        +deactivate(): void
+        +filtroPorFecha(start: datetime, end: datetime): List~PolloLote~
+    }
+    class GalponPolloLote {
+        +id: int
+        +idPolloLote: int
+        +idGalpon: int
+        +fechaHoraIngreso: datetime?
+        +fechaHoraSalida: datetime?
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+        --
+        +create(): GalponPolloLote
+        +read(id: int): GalponPolloLote
+        +update(): void
+        +delete(): void
+        +setCreatedAt(dt: datetime): void
+        +getCreatedAt(): datetime
+        +setCreatedUser(u: string): void
+        +getCreatedUser(): string
+        +setUpdatedAt(dt: datetime): void
+        +getUpdatedAt(): datetime
+        +setLastUserChange(u: string): void
+        +getLastUserChange(): string
+        +activate(): void
+        +deactivate(): void
+        +filtroPorFecha(start: datetime, end: datetime): List~GalponPolloLote~
+    }
+    class CierreSemanalLote {
+        +id: int
+        +idPolloLote: int
+        +fechaHora: datetime
+        +numeroSemana: int
+        +pesoPromedio: double
+        +consumoPromedio: double
+        +uniformidad: double
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+        --
+        +create(): CierreSemanalLote
+        +read(id: int): CierreSemanalLote
+        +update(): void
+        +delete(): void
+        +setCreatedAt(dt: datetime): void
+        +getCreatedAt(): datetime
+        +setCreatedUser(u: string): void
+        +getCreatedUser(): string
+        +setUpdatedAt(dt: datetime): void
+        +getUpdatedAt(): datetime
+        +setLastUserChange(u: string): void
+        +getLastUserChange(): string
+        +activate(): void
+        +deactivate(): void
+        +filtroPorFecha(start: datetime, end: datetime): List~CierreSemanalLote~
+    }
+    class Galpon {
+        +id: int
+        +idRecinto: int
+        +nombre: string
+        +descripcion: string?
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+        --
+        +create(): Galpon
+        +read(id: int): Galpon
+        +update(): void
+        +delete(): void
+        +setCreatedAt(dt: datetime): void
+        +getCreatedAt(): datetime
+        +setCreatedUser(u: string): void
+        +getCreatedUser(): string
+        +setUpdatedAt(dt: datetime): void
+        +getUpdatedAt(): datetime
+        +setLastUserChange(u: string): void
+        +getLastUserChange(): string
+        +activate(): void
+        +deactivate(): void
+        +filtroPorFecha(start: datetime, end: datetime): List~Galpon~
+    }
+    class Recinto {
+        +id: int
+        +idTipoRecinto: int
+        +nombre: string
+        +descripcion: string
+        +distrito: string
+        +canton: string
+        +provincia: string
+        +ubicacionFisica: string
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+        --
+        +create(): Recinto
+        +read(id: int): Recinto
+        +update(): void
+        +delete(): void
+        +setCreatedAt(dt: datetime): void
+        +getCreatedAt(): datetime
+        +setCreatedUser(u: string): void
+        +getCreatedUser(): string
+        +setUpdatedAt(dt: datetime): void
+        +getUpdatedAt(): datetime
+        +setLastUserChange(u: string): void
+        +getLastUserChange(): string
+        +activate(): void
+        +deactivate(): void
+        +filtroPorFecha(start: datetime, end: datetime): List~Recinto~
+    }
+    class RecintoPolloLote {
+        +id: int
+        +idRecinto: int
+        +idPolloLote: int
+        +fechaHoraIngreso: datetime?
+        +fechaHoraSalida: datetime?
+        +codigoBoleta: string?
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+        --
+        +create(): RecintoPolloLote
+        +read(id: int): RecintoPolloLote
+        +update(): void
+        +delete(): void
+        +setCreatedAt(dt: datetime): void
+        +getCreatedAt(): datetime
+        +setCreatedUser(u: string): void
+        +getCreatedUser(): string
+        +setUpdatedAt(dt: datetime): void
+        +getUpdatedAt(): datetime
+        +setLastUserChange(u: string): void
+        +getLastUserChange(): string
+        +activate(): void
+        +deactivate(): void
+        +filtroPorFecha(start: datetime, end: datetime): List~RecintoPolloLote~
+    }
+    class PesajeRecintoPolloLote {
+        +id: int
+        +idRecintoPolloLote: int
+        +tipoRomana: string
+        +peso: double
+        +fechaHora: datetime
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+        --
+        +create(): PesajeRecintoPolloLote
+        +read(id: int): PesajeRecintoPolloLote
+        +update(): void
+        +delete(): void
+        +setCreatedAt(dt: datetime): void
+        +getCreatedAt(): datetime
+        +setCreatedUser(u: string): void
+        +getCreatedUser(): string
+        +setUpdatedAt(dt: datetime): void
+        +getUpdatedAt(): datetime
+        +setLastUserChange(u: string): void
+        +getLastUserChange(): string
+        +activate(): void
+        +deactivate(): void
+        +filtroPorFecha(start: datetime, end: datetime): List~PesajeRecintoPolloLote~
+    }
+    class TipoRecinto {
+        +id: int
+        +nombre: string
+        +descripcion: string
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+        --
+        +create(): TipoRecinto
+        +read(id: int): TipoRecinto
+        +update(): void
+        +delete(): void
+        +setCreatedAt(dt: datetime): void
+        +getCreatedAt(): datetime
+        +setCreatedUser(u: string): void
+        +getCreatedUser(): string
+        +setUpdatedAt(dt: datetime): void
+        +getUpdatedAt(): datetime
+        +setLastUserChange(u: string): void
+        +getLastUserChange(): string
+        +activate(): void
+        +deactivate(): void
+        +filtroPorFecha(start: datetime, end: datetime): List~TipoRecinto~
+    }
+    class Persona {
+        +id: int
+        +nombre: string
+        +apellido1: string
+        +apellido2: string
+        +identificacion: string
+        +tipoIdentificacion: int
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+        --
+        +create(): Persona
+        +read(id: int): Persona
+        +update(): void
+        +delete(): void
+        +setCreatedAt(dt: datetime): void
+        +getCreatedAt(): datetime
+        +setCreatedUser(u: string): void
+        +getCreatedUser(): string
+        +setUpdatedAt(dt: datetime): void
+        +getUpdatedAt(): datetime
+        +setLastUserChange(u: string): void
+        +getLastUserChange(): string
+        +activate(): void
+        +deactivate(): void
+        +filtroPorFecha(start: datetime, end: datetime): List~Persona~
+    }
     class Usuario {
-        +int idUsuario
-        +string nombre
-        +string rol
-        +datetime created_at
-        +string created_user
-        +datetime updated_at
-        +string lastUserChange
-        +boolean crearUsuario(Usuario usuario)
-        +boolean actualizarUsuario(int id, Usuario usuario)
-        +boolean eliminarUsuario(int id)
-        +Usuario obtenerUsuario(int id)
-        +List~Usuario~ listarUsuarios()
-        +boolean autenticarUsuario(string nombre, string password)
+        +id: int
+        +idPersona: int
+        +contrasenna: string
+        +email: string
+        +rol: string
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+        --
+        +create(): Usuario
+        +read(id: int): Usuario
+        +update(): void
+        +delete(): void
+        +setCreatedAt(dt: datetime): void
+        +getCreatedAt(): datetime
+        +setCreatedUser(u: string): void
+        +getCreatedUser(): string
+        +setUpdatedAt(dt: datetime): void
+        +getUpdatedAt(): datetime
+        +setLastUserChange(u: string): void
+        +getLastUserChange(): string
+        +activate(): void
+        +deactivate(): void
+        +filtroPorFecha(start: datetime, end: datetime): List~Usuario~
     }
-
+    class UsuarioRecinto {
+        +id: int
+        +idUsuario: int
+        +idRecinto: int
+        +nombrePuesto: string
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+        --
+        +create(): UsuarioRecinto
+        +read(id: int): UsuarioRecinto
+        +update(): void
+        +delete(): void
+        +setCreatedAt(dt: datetime): void
+        +getCreatedAt(): datetime
+        +setCreatedUser(u: string): void
+        +getCreatedUser(): string
+        +setUpdatedAt(dt: datetime): void
+        +getUpdatedAt(): datetime
+        +setLastUserChange(u: string): void
+        +getLastUserChange(): string
+        +activate(): void
+        +deactivate(): void
+        +filtroPorFecha(start: datetime, end: datetime): List~UsuarioRecinto~
+    }
+    class NotificacionUsuarioRecinto {
+        +id: int
+        +idUsuarioRecinto: int
+        +idNotificacion: int
+        +idProcesoProduccionAvicolaEtapaEvento: int?
+        +descripcion: string?
+        +fechaEnvio: datetime
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+        --
+        +create(): NotificacionUsuarioRecinto
+        +read(id: int): NotificacionUsuarioRecinto
+        +update(): void
+        +delete(): void
+        +setCreatedAt(dt: datetime): void
+        +getCreatedAt(): datetime
+        +setCreatedUser(u: string): void
+        +getCreatedUser(): string
+        +setUpdatedAt(dt: datetime): void
+        +getUpdatedAt(): datetime
+        +setLastUserChange(u: string): void
+        +getLastUserChange(): string
+        +activate(): void
+        +deactivate(): void
+        +filtroPorFecha(start: datetime, end: datetime): List~NotificacionUsuarioRecinto~
+    }
     class Notificacion {
-        +int idNotificacion
-        +string mensaje
-        +datetime fechaEnvio
-        +int idUsuario
-        +datetime created_at
-        +string created_user
-        +datetime updated_at
-        +string lastUserChange
-        +boolean crearNotificacion(Notificacion notificacion)
-        +boolean actualizarNotificacion(int id, Notificacion notificacion)
-        +boolean eliminarNotificacion(int id)
-        +Notificacion obtenerNotificacion(int id)
-        +List~Notificacion~ listarNotificaciones()
-        +boolean enviarNotificacion(int idUsuario, Notificacion notificacion)
+        +id: int
+        +mensaje: string
+        +descripcion: string
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+        --
+        +create(): Notificacion
+        +read(id: int): Notificacion
+        +update(): void
+        +delete(): void
+        +setCreatedAt(dt: datetime): void
+        +getCreatedAt(): datetime
+        +setCreatedUser(u: string): void
+        +getCreatedUser(): string
+        +setUpdatedAt(dt: datetime): void
+        +getUpdatedAt(): datetime
+        +setLastUserChange(u: string): void
+        +getLastUserChange(): string
+        +activate(): void
+        +deactivate(): void
+        +filtroPorFecha(start: datetime, end: datetime): List~Notificacion~
     }
-
     class ContratoInteligente {
-        +int idContrato
-        +string direccionContrato
-        +datetime created_at
-        +string created_user
-        +datetime updated_at
-        +string lastUserChange
-        +boolean desplegarContrato(ContratoInteligente contrato)
-        +boolean actualizarContrato(int id, ContratoInteligente contrato)
-        +boolean eliminarContrato(int id)
-        +ContratoInteligente obtenerContrato(int id)
-        +List~ContratoInteligente~ listarContratos()
-        +boolean interactuarConContrato(int idContrato, string datos)
+        +id: int
+        +nombre: string
+        +descripcion: string
+        +direccionContrato: string
+        +codigoContrato: string
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+        --
+        +create(): ContratoInteligente
+        +read(id: int): ContratoInteligente
+        +update(): void
+        +delete(): void
+        +setCreatedAt(dt: datetime): void
+        +getCreatedAt(): datetime
+        +setCreatedUser(u: string): void
+        +getCreatedUser(): string
+        +setUpdatedAt(dt: datetime): void
+        +getUpdatedAt(): datetime
+        +setLastUserChange(u: string): void
+        +getLastUserChange(): string
+        +activate(): void
+        +deactivate(): void
+        +filtroPorFecha(start: datetime, end: datetime): List~ContratoInteligente~
     }
-
+    class RecintoContratoInteligente {
+        +id: int
+        +idContratoInteligente: int
+        +idRecinto: int
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+        --
+        +create(): RecintoContratoInteligente
+        +read(id: int): RecintoContratoInteligente
+        +update(): void
+        +delete(): void
+        +setCreatedAt(dt: datetime): void
+        +getCreatedAt(): datetime
+        +setCreatedUser(u: string): void
+        +getCreatedUser(): string
+        +setUpdatedAt(dt: datetime): void
+        +getUpdatedAt(): datetime
+        +setLastUserChange(u: string): void
+        +getLastUserChange(): string
+        +activate(): void
+        +deactivate(): void
+        +filtroPorFecha(start: datetime, end: datetime): List~RecintoContratoInteligente~
+    }
     class Transaccion {
-        +int idTransaccion
-        +string datos
-        +datetime timestamp
-        +int idContrato
-        +datetime created_at
-        +string created_user
-        +datetime updated_at
-        +string lastUserChange
-        +boolean crearTransaccion(Transaccion transaccion)
-        +boolean actualizarTransaccion(int id, Transaccion transaccion)
-        +boolean eliminarTransaccion(int id)
-        +Transaccion obtenerTransaccion(int id)
-        +List~Transaccion~ listarTransacciones()
-        +boolean validarTransaccion(int idTransaccion)
+        +id: int
+        +datos: string
+        +fechaHora: datetime
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+        --
+        +create(): Transaccion
+        +read(id: int): Transaccion
+        +update(): void
+        +delete(): void
+        +setCreatedAt(dt: datetime): void
+        +getCreatedAt(): datetime
+        +setCreatedUser(u: string): void
+        +getCreatedUser(): string
+        +setUpdatedAt(dt: datetime): void
+        +getUpdatedAt(): datetime
+        +setLastUserChange(u: string): void
+        +getLastUserChange(): string
+        +activate(): void
+        +deactivate(): void
+        +filtroPorFecha(start: datetime, end: datetime): List~Transaccion~
+    }
+    class RecintoTransaccion {
+        +id: int
+        +idRecintoContratoInteligente: int
+        +idTransaccion: int
+        +fechaHora: datetime
+        +costoEth: double
+        +costoCRC: double
+        +costoUSD: double
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+        --
+        +create(): RecintoTransaccion
+        +read(id: int): RecintoTransaccion
+        +update(): void
+        +delete(): void
+        +setCreatedAt(dt: datetime): void
+        +getCreatedAt(): datetime
+        +setCreatedUser(u: string): void
+        +getCreatedUser(): string
+        +setUpdatedAt(dt: datetime): void
+        +getUpdatedAt(): datetime
+        +setLastUserChange(u: string): void
+        +getLastUserChange(): string
+        +activate(): void
+        +deactivate(): void
+        +filtroPorFecha(start: datetime, end: datetime): List~RecintoTransaccion~
+    }
+    class Nodo {
+        +id: int
+        +nombre: string
+        +estado: string
+        +ubicacion: string
+        +idRecinto: int
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+        --
+        +create(): Nodo
+        +read(id: int): Nodo
+        +update(): void
+        +delete(): void
+        +setCreatedAt(dt: datetime): void
+        +getCreatedAt(): datetime
+        +setCreatedUser(u: string): void
+        +getCreatedUser(): string
+        +setUpdatedAt(dt: datetime): void
+        +getUpdatedAt(): datetime
+        +setLastUserChange(u: string): void
+        +getLastUserChange(): string
+        +activate(): void
+        +deactivate(): void
+        +filtroPorFecha(start: datetime, end: datetime): List~Nodo~
+    }
+    class HuevoFertilLote {
+        +id: int
+        +numeroLote: string
+        +idGalpon: int
+        +fechaProduccion: datetime
+        +cantidad: int
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+        --
+        +create(): HuevoFertilLote
+        +read(id: int): HuevoFertilLote
+        +update(): void
+        +delete(): void
+        +setCreatedAt(dt: datetime): void
+        +getCreatedAt(): datetime
+        +setCreatedUser(u: string): void
+        +getCreatedUser(): string
+        +setUpdatedAt(dt: datetime): void
+        +getUpdatedAt(): datetime
+        +setLastUserChange(u: string): void
+        +getLastUserChange(): string
+        +activate(): void
+        +deactivate(): void
+        +filtroPorFecha(start: datetime, end: datetime): List~HuevoFertilLote~
+    }
+    class HuevoFertilLoteMaquina {
+        +id: int
+        +idHuevoFertil: int
+        +idMaquina: int
+        +fechaHoraInicio: datetime
+        +fechaHoraFinal: datetime
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+        --
+        +create(): HuevoFertilLoteMaquina
+        +read(id: int): HuevoFertilLoteMaquina
+        +update(): void
+        +delete(): void
+        +setCreatedAt(dt: datetime): void
+        +getCreatedAt(): datetime
+        +setCreatedUser(u: string): void
+        +getCreatedUser(): string
+        +setUpdatedAt(dt: datetime): void
+        +getUpdatedAt(): datetime
+        +setLastUserChange(u: string): void
+        +getLastUserChange(): string
+        +activate(): void
+        +deactivate(): void
+        +filtroPorFecha(start: datetime, end: datetime): List~HuevoFertilLoteMaquina~
+    }
+    class LoteReproductoras {
+        +id: int
+        +codigo: string
+        +lineaGenetica: string
+        +fechaIngreso: datetime
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+        --
+        +create(): LoteReproductoras
+        +read(id: int): LoteReproductoras
+        +update(): void
+        +delete(): void
+        +setCreatedAt(dt: datetime): void
+        +getCreatedAt(): datetime
+        +setCreatedUser(u: string): void
+        +getCreatedUser(): string
+        +setUpdatedAt(dt: datetime): void
+        +getUpdatedAt(): datetime
+        +setLastUserChange(u: string): void
+        +getLastUserChange(): string
+        +activate(): void
+        +deactivate(): void
+        +filtroPorFecha(start: datetime, end: datetime): List~LoteReproductoras~
+    }
+    class LoteReproductorasHuevoFertilLote {
+        +id: int
+        +idHuevoFertilLote: int
+        +idLoteReproductoras: int
+        +fechaRecoleccion: datetime
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+        --
+        +create(): LoteReproductorasHuevoFertilLote
+        +read(id: int): LoteReproductorasHuevoFertilLote
+        +update(): void
+        +delete(): void
+        +setCreatedAt(dt: datetime): void
+        +getCreatedAt(): datetime
+        +setCreatedUser(u: string): void
+        +getCreatedUser(): string
+        +setUpdatedAt(dt: datetime): void
+        +getUpdatedAt(): datetime
+        +setLastUserChange(u: string): void
+        +getLastUserChange(): string
+        +activate(): void
+        +deactivate(): void
+        +filtroPorFecha(start: datetime, end: datetime): List~LoteReproductorasHuevoFertilLote~
+    }
+    class Inspeccion {
+        +id: int
+        +idUsuario: int
+        +resultado: string
+        +fecha: datetime
+        +tipo: string
+        +resuelto: boolean
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+        --
+        +create(): Inspeccion
+        +read(id: int): Inspeccion
+        +update(): void
+        +delete(): void
+        +setCreatedAt(dt: datetime): void
+        +getCreatedAt(): datetime
+        +setCreatedUser(u: string): void
+        +getCreatedUser(): string
+        +setUpdatedAt(dt: datetime): void
+        +getUpdatedAt(): datetime
+        +setLastUserChange(u: string): void
+        +getLastUserChange(): string
+        +activate(): void
+        +deactivate(): void
+        +filtroPorFecha(start: datetime, end: datetime): List~Inspeccion~
+    }
+    class InspeccionRecinto {
+        +id: int
+        +idInspeccion: int
+        +idRecinto: int
+        +fecha: datetime
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+        --
+        +create(): InspeccionRecinto
+        +read(id: int): InspeccionRecinto
+        +update(): void
+        +delete(): void
+        +setCreatedAt(dt: datetime): void
+        +getCreatedAt(): datetime
+        +setCreatedUser(u: string): void
+        +getCreatedUser(): string
+        +setUpdatedAt(dt: datetime): void
+        +getUpdatedAt(): datetime
+        +setLastUserChange(u: string): void
+        +getLastUserChange(): string
+        +activate(): void
+        +deactivate(): void
+        +filtroPorFecha(start: datetime, end: datetime): List~InspeccionRecinto~
+    }
+    class InspeccionProcesoProduccionAvicolaEtapa {
+        +id: int
+        +idProcesoProduccionAvicolaEtapa: int
+        +idInspeccion: int
+        +fecha: datetime
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+        --
+        +create(): InspeccionProcesoProduccionAvicolaEtapa
+        +read(id: int): InspeccionProcesoProduccionAvicolaEtapa
+        +update(): void
+        +delete(): void
+        +setCreatedAt(dt: datetime): void
+        +getCreatedAt(): datetime
+        +setCreatedUser(u: string): void
+        +getCreatedUser(): string
+        +setUpdatedAt(dt: datetime): void
+        +getUpdatedAt(): datetime
+        +setLastUserChange(u: string): void
+        +getLastUserChange(): string
+        +activate(): void
+        +deactivate(): void
+        +filtroPorFecha(start: datetime, end: datetime): List~InspeccionProcesoProduccionAvicolaEtapa~
+    }
+    class RecintoPolloLoteProcesoProduccionAvicolaEtapaEvento {
+        +id: int
+        +idRecintoPolloLote: int
+        +idProcesoProduccionAvicolaEtapaEvento: int
+        +fecha: datetime
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+        --
+        +create(): RecintoPolloLoteProcesoProduccionAvicolaEtapaEvento
+        +read(id: int): RecintoPolloLoteProcesoProduccionAvicolaEtapaEvento
+        +update(): void
+        +delete(): void
+        +setCreatedAt(dt: datetime): void
+        +getCreatedAt(): datetime
+        +setCreatedUser(u: string): void
+        +getCreatedUser(): string
+        +setUpdatedAt(dt: datetime): void
+        +getUpdatedAt(): datetime
+        +setLastUserChange(u: string): void
+        +getLastUserChange(): string
+        +activate(): void
+        +deactivate(): void
+        +filtroPorFecha(start: datetime, end: datetime): List~RecintoPolloLoteProcesoProduccionAvicolaEtapaEvento~
+    }
+    class EntregaPolloLote {
+        +id: int
+        +idPolloLote: int
+        +fechaEntrega: datetime
+        +cantidadEntregada: int
+        +pesoEntregado: double
+        +observaciones: string
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+        --
+        +create(): EntregaPolloLote
+        +read(id: int): EntregaPolloLote
+        +update(): void
+        +delete(): void
+        +setCreatedAt(dt: datetime): void
+        +getCreatedAt(): datetime
+        +setCreatedUser(u: string): void
+        +getCreatedUser(): string
+        +setUpdatedAt(dt: datetime): void
+        +getUpdatedAt(): datetime
+        +setLastUserChange(u: string): void
+        +getLastUserChange(): string
+        +activate(): void
+        +deactivate(): void
+        +filtroPorFecha(start: datetime, end: datetime): List~EntregaPolloLote~
+        }
+    class EntregaPolloLoteClienteDistribuidor {
+        +id: int
+        +idClienteDistribuidor: int
+        +idEntregaPolloLote: int
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+        --
+        +create(): EntregaPolloLoteClienteDistribuidor
+        +read(id: int): EntregaPolloLoteClienteDistribuidor
+        +update(): void
+        +delete(): void
+        +setCreatedAt(dt: datetime): void
+        +getCreatedAt(): datetime
+        +setCreatedUser(u: string): void
+        +getCreatedUser(): string
+        +setUpdatedAt(dt: datetime): void
+        +getUpdatedAt(): datetime
+        +setLastUserChange(u: string): void
+        +getLastUserChange(): string
+        +activate(): void
+        +deactivate(): void
+        +filtroPorFecha(start: datetime, end: datetime): List~EntregaPolloLoteClienteDistribuidor~
+    }
+    class ClienteDistribuidor {
+        +id: int
+        +nombre: string
+        +identificacion: string
+        +tipoIdentificacion: string
+        +telefono: string
+        +correo: string
+        +direccion: string
+        +estado: bit
+        +created_at: datetime
+        +created_user: string
+        +updated_at: datetime
+        +lastUserChange: string
+        --
+        +create(): ClienteDistribuidor
+        +read(id: int): ClienteDistribuidor
+        +update(): void
+        +delete(): void
+        +setCreatedAt(dt: datetime): void
+        +getCreatedAt(): datetime
+        +setCreatedUser(u: string): void
+        +getCreatedUser(): string
+        +setUpdatedAt(dt: datetime): void
+        +getUpdatedAt(): datetime
+        +setLastUserChange(u: string): void
+        +getLastUserChange(): string
+        +activate(): void
+        +deactivate(): void
+        +filtroPorFecha(start: datetime, end: datetime): List~ClienteDistribuidor~
     }
 
-    class Nodo {
-        +int idNodo
-        +string estado
-        +datetime created_at
-        +string created_user
-        +datetime updated_at
-        +string lastUserChange
-        +boolean registrarNodo(Nodo nodo)
-        +boolean actualizarNodo(int id, Nodo nodo)
-        +boolean eliminarNodo(int id)
-        +Nodo obtenerNodo(int id)
-        +List~Nodo~ listarNodos()
-        +boolean cambiarEstadoNodo(int id, string nuevoEstado)
-        +boolean validarTransaccionEnNodo(int idNodo, int idTransaccion)
-    }
